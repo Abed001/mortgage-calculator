@@ -8,7 +8,9 @@
   --primary-font: "Plus Jakarta Sans", sans-serif;
   --secondary-font: "Sixtyfour Convergence", sans-serif;
   --lime: #b9d97f;
+  --slate900: #2E4241;
   --slate700: #546564;
+  --slate300: #96b3b0;
 }
 
 .font-primary {
@@ -36,18 +38,17 @@ body {
 }
 
 input {
-  position: relative;
-  height: 35px;
-  border: 2px solid var(--slate700);
-  border-radius: 5px;
+  height: 40px;
+  border: 2px solid var(--slate300);
+  border-radius: 0 2px 2px 0;
 }
 
-@media only screen and (max-width: 600px) {
-  /* Styles for small devices */
-  input {
-    height: 50px;
-  }
+.input-reverse {
+  height: 40px;
+  border: 2px solid var(--slate300);
+  border-radius: 2px 0 0 2px;
 }
+
 
 @media only screen and (max-width: 768px) {
   .border-radius {
@@ -55,3 +56,14 @@ input {
   }
 }
 
+
+.inputs::before{
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 6px;
+  left:8px;
+  border: 2px solid var(--slate900);
+  border-radius: 100px;
+}

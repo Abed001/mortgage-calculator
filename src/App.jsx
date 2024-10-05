@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import Illustrationsvg from "./components/Illustrationsvg"
 import Iconcalculator from "./components/Iconcalculator"
 
 import { useForm } from 'react-hook-form';
 
 function App() {
+
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
 
@@ -20,27 +21,52 @@ function App() {
 
             <div className='mt-10 w-[100%]'>
               <form onSubmit={handleSubmit(onSubmit)}>
+
                 <div className='flex flex-col '>
-                  
                   <label className=' font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Amount</label>
-                  <div className='relative'>
-                    <span className='z-10 absolute top-0 h-[35px] w-[50px] border-2 border-slate-700 border-r-0 bg-lime rounded-sm left-0 '></span>
-                  <input className='-z-1 lg:mb-5'  {...register('mortgageAmount', { required: true })} />
-                  {errors.mortgageAmount && <p> This field is required</p>}
+                  <div className='flex'>
+                    <div><p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[40px] flex justify-center items-center">$</p></div>
+                    <div className='flex flex-col w-[100%] '>
+                      <input className='lg:mb-2 w-[100%]' {...register('mortgageAmount', { required: true })} />
+                      <div> {errors.mortgageAmount && <p className='text-[12px] -ml-[25px]'> This field is required</p>}</div>
+                    </div>
+
                   </div>
 
-                  <div className='flex flex-col lg:flex-row justify-center'>
-                    <div className='flex flex-col w-[100%] lg:w-[50%]'>
+                  <div className='w-[100%] mt-5 flex flex-col lg:flex-row justify-center lg:gap-x-5 items-center lg:justify-evenly '>
+                    <div className='flex flex-col  w-[100%] lg:w-[50%] mb-5 lg:mb-0 '>
                       <label className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Term</label>
-                      <input className='inputs lg:mr-5 '  {...register('mortgageTerm', { required: true })} />
-                      {errors.mortgageTerm && <p>This field is required</p>}
+                      <div className='flex'>
+                        <input className='input-reverse w-[100%]' {...register('mortgageTerm', { required: true })} />
+                        {errors.mortgageTerm && <p>This field is required</p>}
+                        <div><p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[40px]">years</p></div>
+                      </div>
+
                     </div>
 
-                    <div className='flex flex-col w-[100%]  lg:w-[50%]'>
+                    <div className='flex flex-col w-[100%] lg:w-[50%]'>
                       <label className='font-semibold text-[12px] text-slate-300 mb-2'>Interest Rate</label>
-                      <input className='inputs' {...register('interestRate', { required: true })} />
-                      {errors.interestRate && <p>This field is required</p>}
+                      <div className='flex'>
+                        <input className='input-reverse  w-[100%]' {...register('interestRate', { required: true })} />
+                        {errors.interestRate && <p>This field is required</p>}
+                        <div><p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[40px]">%</p></div>
+                      </div>
+
                     </div>
+
+                  </div>
+                  <div className=' flex flex-col mt-5  '>
+                    <label className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Type</label>
+
+                    <div className='relative border-2 border-slate-300 rounded-sm  h-[40px]  p-2 flex justify-start items-center'>
+                      <input className='inputs w-6 ' type="radio" />
+                      <p className='ml-2 font-bold text-slate-800'>Repayment</p></div>
+
+
+                    <div className='relative mt-2 border-2 border-slate-300 rounded-sm  h-[40px]  p-2 flex justify-start items-center'>
+                      <input className='inputs w-6' type="radio" />
+                      <p className='ml-2 font-bold text-slate-800'>Interest Only</p></div>
+
                   </div>
                 </div>
                 <div className='w-[100%] flex justify-center lg:justify-start'>

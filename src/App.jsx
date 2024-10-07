@@ -6,15 +6,24 @@ import { useForm } from 'react-hook-form';
 
 function App() {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { reset, register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
 
   const mortgageAmount = watch('mortgageAmount');
   const interestRate = watch('interestRate');
   const mortgageTerm = watch('mortgageTerm');
   const [repaymentType, setRepaymentType] = useState('repayment');
-  //const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [loanTerm, setLoanTerm] = useState(0);
 
+
+  const toggleTrue = () => {
+    setClicked(true);
+  }
+
+  const toggleFalse = () => {
+    setClicked(false);
+  }
 
   const calculateRepayment = () => {
     const principal = mortgageAmount;
@@ -23,14 +32,15 @@ function App() {
 
     const monthlyRepayment = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfMonths) / (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1);
     return monthlyRepayment;
+
   };
 
   const calculateInterestOnly = () => {
     const monthlyInterestRate = interestRate / 100 / 12;
     const interestOnlyPayment = mortgageAmount * monthlyInterestRate;
-
     return interestOnlyPayment;
   };
+
 
 
   return (
@@ -40,7 +50,7 @@ function App() {
           <div className='border-radius w-[90%] flex flex-col mx-auto mt-10 lg:px-0 lg:mt-0 lg:py-5 '>
             <div className='flex flex-col lg:flex-row justify-between'>
               <p className='text-slate-800 font-bold text-[20px]'>Mortgage Calculator</p>
-              <p className='font-semibold cursor-pointer underline text-[12px] text-slate-700'>Clear All</p>
+              <p onClick={() => { toggleFalse(), reset() }} className='font-semibold cursor-pointer underline text-[12px] text-slate-700'>Clear All</p>
             </div>
 
             <div className='mt-10 w-[100%] '>
@@ -51,7 +61,7 @@ function App() {
                   <div className='flex'>
                     <div><p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px] flex justify-center items-center">$</p></div>
                     <div className='flex flex-col w-[100%] '>
-                      <input type='number' className='lg:mb-2 w-[100%]' {...register('mortgageAmount', { required: true })} />
+                      <input type='number' step="any" className='lg:mb-2 w-[100%]' {...register('mortgageAmount', { required: true })} />
                       <div> {errors.mortgageAmount && <p className='text-[12px] -ml-[25px] mt-2'> This field is required</p>}</div>
                     </div>
 
@@ -62,7 +72,8 @@ function App() {
                       <label className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Term</label>
                       <div className='flex flex-col w-[100%] '>
                         <div className='flex'>
-                          <input type='number' className='input-reverse w-[100%]' {...register('mortgageTerm', { required: true })} />
+                          <input type='number' step="any" className='input-reverse w-[100%]' {...register('mortgageTerm')} onChange={(e) => setLoanTerm(parseInt(e.target.value))} />
+
                           <div>
                             <p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">years</p>
                           </div>
@@ -78,7 +89,7 @@ function App() {
                       <label className='font-semibold text-[12px] text-slate-300 mb-2'>Interest Rate</label>
                       <div className='flex flex-col w-[100%] '>
                         <div className='flex'>
-                          <input type='number' className='input-reverse w-[100%]' {...register('interestRate', { required: true })} />
+                          <input type='number' step="any" className='input-reverse w-[100%]' {...register('interestRate', { required: true })} />
                           <div>
                             <p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">%</p>
                           </div>
@@ -96,7 +107,7 @@ function App() {
                     <label className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Type</label>
 
                     <div className='relative border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
-                      <input className='inputs inputss w-6 ' type="radio" value="repayment" checked={repaymentType === 'repayment'} {...register('repaymentType')}  onChange={() => setRepaymentType('repayment')}/>
+                      <input className='inputs inputss w-6 ' type="radio" value="repayment" checked={repaymentType === 'repayment'} {...register('repaymentType')} onChange={() => setRepaymentType('repayment')} />
                       <p className='ml-2 font-bold text-slate-800'>Repayment</p></div>
 
 
@@ -109,9 +120,9 @@ function App() {
                 <div className='w-[100%] flex justify-center lg:justify-start'>
                   <button onClick={() => {
                     if (repaymentType === 'repayment') {
-                      console.log('Monthly Repayment:', calculateRepayment());
+                      console.log('Monthly Repayment:', calculateRepayment(), toggleTrue());
                     } else {
-                      console.log('Interest Only Payment:', calculateInterestOnly());
+                      console.log('Interest Only Payment:', calculateInterestOnly(), toggleTrue());
                     }
                   }} className='mb-10 cursor-pointer mt-10 bg-lime w-[100%] lg:w-[80%] py-4 lg:py-2 rounded-full text-slate-800 font-bold flex justify-center items-center gap-x-2 ' type="submit" ><Iconcalculator />Calculate Repayments</button>
                 </div>
@@ -121,13 +132,24 @@ function App() {
           </div>
         </div>
         <div className='p-10 pb-20 lg:pb-0 gap-y-5 lg:rounded-bl-[5rem] lg:rounded-tr-3xl lg:rounded-br-3xl bg-slate-800 flex flex-col justify-center items-center h-[100%]  w-[100%] lg:w-[500px]'>
+          {!clicked ? (
+            <>
+              <Illustrationsvg />
+              <h1 className='text-white font-bold'>Results shown here</h1>
+              <p className='text-[12px] text-center text-slate-400'>Complete the form and click "calculate repayment"
+                to see what your monthly  repayment would be.
+              </p>
+            </>) :
+            (
+              <>
 
-          <Illustrationsvg />
-          <h1 className='text-white font-bold'>Results shown here</h1>
-          <p className='text-[12px] text-center text-slate-400'>Complete the form and click "calculate repayment"
-            to see what your monthly  repayment would be.
-          </p>
+                {repaymentType === 'repayment' && <p>monthly repayment ${calculateRepayment().toFixed(2)}</p>}
+                {repaymentType === 'interestOnly' && <p>${calculateInterestOnly().toFixed(2)}</p>}
 
+                <p>total repayment over the term: <p>{(calculateRepayment() * loanTerm).toFixed(2)}</p></p>
+              </>
+            )
+          }
 
         </div>
       </div>

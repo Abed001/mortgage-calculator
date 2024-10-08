@@ -38,6 +38,7 @@ body {
 }
 
 input {
+  padding-left:15px;
   height: 40px;
   border: 2px solid var(--slate300);
   border-radius: 0 2px 2px 0;

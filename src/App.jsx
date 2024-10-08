@@ -49,8 +49,8 @@ function App() {
         <div className='bg-white lg:rounded-3xl flex h-[100%] w-[100%] lg:w-[500px]'>
           <div className='border-radius w-[90%] flex flex-col mx-auto mt-10 lg:px-0 lg:mt-0 lg:py-5 '>
             <div className='flex flex-col lg:flex-row justify-between'>
-              <p className='text-slate-800 font-bold text-[20px]'>Mortgage Calculator</p>
-              <p onClick={() => { toggleFalse(), reset() }} className='font-semibold cursor-pointer underline text-[12px] text-slate-700'>Clear All</p>
+              <p className='text-slate-800 font-bold text-[20px] '>Mortgage Calculator</p>
+              <p onClick={() => { toggleFalse(), reset() }} className='mt-2 font-semibold cursor-pointer underline text-[12px] text-slate-700'>Clear All</p>
             </div>
 
             <div className='mt-10 w-[100%] '>
@@ -131,7 +131,7 @@ function App() {
             </div>
           </div>
         </div>
-        <div className='p-10 pb-20 lg:pb-0 gap-y-5 lg:rounded-bl-[5rem] lg:rounded-tr-3xl lg:rounded-br-3xl bg-slate-800 flex flex-col justify-center items-center h-[100%]  w-[100%] lg:w-[500px]'>
+        <div className='p-10 pb-20 lg:p-0 lg:py-6 lg:pb-0 lg:px-10  gap-y-5 lg:rounded-bl-[5rem] lg:rounded-tr-3xl lg:rounded-br-3xl bg-slate-800 flex flex-col justify-center items-center h-[100%]  w-[100%] lg:w-[500px]'>
           {!clicked ? (
             <>
               <Illustrationsvg />
@@ -141,13 +141,26 @@ function App() {
               </p>
             </>) :
             (
-              <>
-
-                {repaymentType === 'repayment' && <p>monthly repayment ${calculateRepayment().toFixed(2)}</p>}
-                {repaymentType === 'interestOnly' && <p>${calculateInterestOnly().toFixed(2)}</p>}
-
-                <p>total repayment over the term: <p>{(calculateRepayment() * loanTerm).toFixed(2)}</p></p>
-              </>
+              <div className='flex flex-col h-[100%] gap-y-5 items-center'>
+                <h1 className='text-white mr-auto font-bold'>Your results</h1>
+                <p className='text-slate-300 text-[12px]'>Your result are shown below based on the information you provided.
+                  To adjust the results,edit the form and click "calculate repayment" again.
+                </p>
+                {/*card*/}
+                <div className='bg-slate-950 gap-y-5 flex flex-col w-[100%] p-4 pb-10 border-t-4 border-lime rounded-md'>
+                  <div className='border-b-[1px] border-slate-400'>
+                    <p className='text-slate-400 text-[12px]'>Your monthly repayments</p>
+                    <h1 className='text-lime font-bold text-[3rem] mb-5'>
+                      {repaymentType === 'repayment' && <p>${calculateRepayment().toFixed(2)}</p>}
+                      {repaymentType === 'interestOnly' && <p>${calculateInterestOnly().toFixed(2)}</p>}
+                    </h1>
+                  </div>
+                  <div className='flex flex-col '>
+                    <p className=' text-slate-400  text-[12px]'>Total you'll repay over the term</p>
+                    <h1 className='text-white font-bold '>${(calculateRepayment() * loanTerm).toFixed(2)}</h1>
+                  </div>
+                </div>
+              </div>
             )
           }
 

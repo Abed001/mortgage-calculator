@@ -8,9 +8,11 @@
   --primary-font: "Plus Jakarta Sans", sans-serif;
   --secondary-font: "Sixtyfour Convergence", sans-serif;
   --lime: #b9d97f;
-  --slate900: #2E4241;
+  --slate900: #2e4241;
   --slate700: #546564;
   --slate300: #96b3b0;
+  --error: #d97f7f;
+  --yellow: #FFFF40;
 }
 
 .font-primary {
@@ -37,11 +39,20 @@ body {
   }
 }
 
+input[type="radio"]:focus {
+  accent-color: var(--yellow);
+}
+
 input {
-  padding-left:15px;
+  padding-left: 15px;
   height: 40px;
   border: 2px solid var(--slate300);
   border-radius: 0 2px 2px 0;
+}
+
+input:focus {
+  border: 2px solid var(--lime);
+  outline: none;
 }
 
 .input-reverse {
@@ -50,63 +61,90 @@ input {
   border-radius: 2px 0 0 2px;
 }
 
-
 @media only screen and (max-width: 768px) {
   .border-radius {
     border-radius: 10px;
   }
 }
 
-
 @media only screen and (max-width: 600px) {
   input {
-    height: 50px
+    height: 50px;
   }
 
   .input-reverse {
     height: 50px;
   }
-  
 }
 
-@media only screen and (max-width: 600px) { /* Adjust breakpoint as needed */
+@media only screen and (max-width: 600px) {
+  /* Adjust breakpoint as needed */
   .inputs::before {
-    content: '';
+    content: "";
     margin-top: 7px;
     position: absolute;
     width: 24px;
     height: 24px;
     top: 4px;
     left: 8px;
-    border: 2px solid var(--slate900);
+    border: 2px solid var(--slate300);
     border-radius: 100px;
     display: block; /* Show the element on small screens */
   }
 }
 
-@media only screen and (min-width: 601px) { /* Adjust breakpoint as needed */
+@media only screen and (max-width: 600px) {
+  /* Adjust breakpoint as needed */
+  .inputs:focus::before {
+    content: "";
+    margin-top: 7px;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 4px;
+    left: 8px;
+    border: 2px solid var(--yellow);
+    border-radius: 100px;
+    display: block; /* Show the element on small screens */
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  /* Adjust breakpoint as needed */
   .inputs::before {
     display: none; /* Hide the element on large screens */
   }
 }
 
-
-
-@media only screen and (min-width: 601px) { /* Adjust breakpoint as needed */
-  .inputss::before{
-    content: '';
+@media only screen and (min-width: 601px) {
+  /* Adjust breakpoint as needed */
+  .inputss::before {
+    content: "";
     position: absolute;
     width: 24px;
     height: 24px;
     margin-top: 2px;
     top: 4px;
-    left:8px;
-    border: 2px solid var(--slate900);
+    left: 8px;
+    border: 2px solid var(--slate300);
     border-radius: 100px;
     display: block;
   }
 }
 
-
-
+@media only screen and (min-width: 601px) {
+  /* Adjust breakpoint as needed */
+  .inputss:focus::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    top: 4px;
+    left: 8px;
+    border: 2px solid var(--yellow);
+    border-radius: 100px;
+    display: block;
+  }
+}
 

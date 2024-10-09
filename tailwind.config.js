@@ -11,6 +11,7 @@ module.exports = {
         xl: '1440px', // Desktop breakpoint
       },
       colors: {
+        yellow: '#FFFF40',
         lime: '#B9D97F',
         red: '#D97F7F',
         white: '#FFFFFF',
@@ -22,7 +23,7 @@ module.exports = {
           900: '#2E4241',
         },
       },
-      
+
     },
   },
   plugins: [],

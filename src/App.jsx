@@ -15,6 +15,53 @@ function App() {
   const [repaymentType, setRepaymentType] = useState('repayment');
   const [clicked, setClicked] = useState(false);
   const [loanTerm, setLoanTerm] = useState(0);
+  const [mortgageAmountFocused, setMortgageAmountFocused] = useState(false);
+  const [mortgageTermFocused, setMortgageTermFocused] = useState(false);
+  const [interestRateFocused, setInterestRateFocused] = useState(false);
+  const [radioRepaymentFocused, setRadioRepaymentFocused] = useState(false);
+  const [radioInterestFocused, setRadioInterestFocused] = useState(false);
+
+  const handleRadioRepaymentFocus = () => {
+    setRadioRepaymentFocused(true);
+  };
+
+  const handleRadioRepaymentBlur = () => {
+    setRadioRepaymentFocused(false);
+  };
+
+  const handleRadioInterestFocus = () => {
+    setRadioInterestFocused(true);
+  };
+
+  const handleRadioInterestBlur = () => {
+    setRadioInterestFocused(false);
+  };
+
+
+
+  const handleMortgageAmountFocus = () => {
+    setMortgageAmountFocused(true);
+  };
+
+  const handleMortgageAmountBlur = () => {
+    setMortgageAmountFocused(false);
+  };
+
+  const handleMortgageTermFocus = () => {
+    setMortgageTermFocused(true);
+  };
+
+  const handleMortgageTermBlur = () => {
+    setMortgageTermFocused(false);
+  };
+
+  const handleInterestRateFocus = () => {
+    setInterestRateFocused(true);
+  };
+
+  const handleInterestRateBlur = () => {
+    setInterestRateFocused(false);
+  };
 
 
   const toggleTrue = () => {
@@ -50,7 +97,7 @@ function App() {
           <div className='border-radius w-[90%] flex flex-col mx-auto mt-10 lg:px-0 lg:mt-0 lg:py-5 '>
             <div className='flex flex-col lg:flex-row justify-between'>
               <p className='text-slate-800 font-bold text-[20px] '>Mortgage Calculator</p>
-              <p onClick={() => { toggleFalse(), reset() }} className='mt-2 font-semibold cursor-pointer underline text-[12px] text-slate-700'>Clear All</p>
+              <button onClick={() => { toggleFalse(), reset() }} className=' text-left mt-2 font-semibold cursor-pointer underline text-[12px] text-slate-700'>Clear All</button>
             </div>
 
             <div className='mt-10 w-[100%] '>
@@ -59,10 +106,19 @@ function App() {
                 <div className='flex flex-col '>
                   <label className=' font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Amount</label>
                   <div className='flex'>
-                    <div><p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px] flex justify-center items-center">$</p></div>
+                    <div>
+                      <p onFocus={handleMortgageAmountFocus}
+                        onBlur={handleMortgageAmountBlur} style={{ backgroundColor: errors.mortgageAmount ? '#D97F7F' : mortgageAmountFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700  p-2 h-[50px] lg:h-[40px] flex justify-center items-center">$</p>
+                    </div>
                     <div className='flex flex-col w-[100%] '>
-                      <input type='number' step="any" className='lg:mb-2 w-[100%]' {...register('mortgageAmount', { required: true })} />
-                      <div> {errors.mortgageAmount && <p className='text-[12px] -ml-[25px] mt-2'> This field is required</p>}</div>
+                      <input
+                        onFocus={handleMortgageAmountFocus}
+                        onBlur={handleMortgageAmountBlur}
+                        style={{
+                          borderColor: errors.mortgageAmount ? '#D97F7F' : mortgageAmountFocused ? '#B9D97F' : '#96B3B0',
+                        }}
+                        type='number' step="any" className='lg:mb-2 w-[100%]' {...register('mortgageAmount', { required: true })} />
+                      <div> {errors.mortgageAmount && <p style={{ color: errors.mortgageAmount ? '#D97F7F' : '' }} className='text-[12px] -ml-[25px] mt-2 font-semibold'> This field is required</p>}</div>
                     </div>
 
                   </div>
@@ -72,15 +128,18 @@ function App() {
                       <label className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Term</label>
                       <div className='flex flex-col w-[100%] '>
                         <div className='flex'>
-                          <input type='number' step="any" className='input-reverse w-[100%]' {...register('mortgageTerm')} onChange={(e) => setLoanTerm(parseInt(e.target.value))} />
-
+                          <input
+                            onFocus={handleMortgageTermFocus}
+                            onBlur={handleMortgageTermBlur}
+                            style={{
+                              borderColor: errors.mortgageTerm ? '#D97F7F' : mortgageTermFocused ? '#B9D97F' : '#96B3B0',
+                            }} type='number' step="any" className='input-reverse w-[100%]'  {...register('mortgageTerm', { required: true })} onInput={(e) => setLoanTerm(parseInt(e.target.value))} />
                           <div>
-                            <p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">years</p>
+                            <p onFocus={handleMortgageTermFocus}
+                              onBlur={handleMortgageTermBlur} style={{ backgroundColor: errors.mortgageTerm ? '#D97F7F' : mortgageTermFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">years</p>
                           </div>
                         </div>
-                        <div> {errors.mortgageTerm && <p className='text-[12px] -ml-[25px] pl-6 mt-2'> This field is required</p>}</div>
-
-
+                        <div> {errors.mortgageTerm && <p style={{ color: errors.mortgageTerm ? '#D97F7F' : '' }} className='text-[12px] -ml-[25px] pl-6 mt-2'> This field is required</p>}</div>
                       </div>
 
                     </div>
@@ -89,29 +148,39 @@ function App() {
                       <label className='font-semibold text-[12px] text-slate-300 mb-2'>Interest Rate</label>
                       <div className='flex flex-col w-[100%] '>
                         <div className='flex'>
-                          <input type='number' step="any" className='input-reverse w-[100%]' {...register('interestRate', { required: true })} />
+                          <input onFocus={handleInterestRateFocus}
+                            onBlur={handleInterestRateBlur}
+                            style={{
+                              borderColor: errors.interestRate ? '#D97F7F' : interestRateFocused ? '#B9D97F' : '#96B3B0',
+                            }} type='number' step="any" className='input-reverse w-[100%]' {...register('interestRate', { required: true })} />
                           <div>
-                            <p className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">%</p>
+                            <p onFocus={handleInterestRateFocus}
+                              onBlur={handleInterestRateBlur} style={{ backgroundColor: errors.interestRate ? '#D97F7F' : interestRateFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">%</p>
                           </div>
                         </div>
-                        <div> {errors.interestRate && <p className='text-[12px] -ml-[25px] pl-6 mt-2'> This field is required</p>}</div>
-
-
-
-
+                        <div> {errors.interestRate && <p style={{ color: errors.interestRate ? '#D97F7F' : '' }} className='text-[12px] -ml-[25px] pl-6 mt-2'> This field is required</p>}</div>
                       </div>
                     </div>
-
                   </div>
+
                   <div className=' flex flex-col mt-5  '>
                     <label className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Type</label>
 
-                    <div className='relative border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
-                      <input className='inputs inputss w-6 ' type="radio" value="repayment" checked={repaymentType === 'repayment'} {...register('repaymentType')} onChange={() => setRepaymentType('repayment')} />
+                    <div onFocus={handleRadioRepaymentFocus}
+                      onBlur={handleRadioRepaymentBlur} style={{
+                        backgroundColor: radioRepaymentFocused ? '#B9D97F' : ''
+                        , borderColor: radioRepaymentFocused ? '#FFFF40' : '#96B3B0'
+                      }}
+                      className='relative border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
+                      <input className='inputs inputss w-6' type="radio" value="repayment" checked={repaymentType === 'repayment'} {...register('repaymentType')} onChange={() => setRepaymentType('repayment')} />
                       <p className='ml-2 font-bold text-slate-800'>Repayment</p></div>
 
 
-                    <div className='relative mt-2 border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
+                    <div onFocus={handleRadioInterestFocus}
+                      onBlur={handleRadioInterestBlur} style={{
+                        backgroundColor: radioInterestFocused ? '#B9D97F' : ''
+                        , borderColor: radioInterestFocused ? '#FFFF40' : '#96B3B0'
+                      }} className='relative mt-2 border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
                       <input className=' inputss inputs w-6' type="radio" value="interestOnly" checked={repaymentType === 'interestOnly'} {...register('repaymentType')} onChange={() => setRepaymentType('interestOnly')} />
                       <p className='ml-2 font-bold text-slate-800'>Interest Only</p></div>
 
@@ -156,7 +225,7 @@ function App() {
                     </h1>
                   </div>
                   <div className='flex flex-col '>
-                    <p className=' text-slate-400  text-[12px]'>Total you'll repay over the term</p>
+                    <p className=' text-slate-400 text-[12px]'>Total you'll repay over the term</p>
                     <h1 className='text-white font-bold '>${(calculateRepayment() * loanTerm).toFixed(2)}</h1>
                   </div>
                 </div>

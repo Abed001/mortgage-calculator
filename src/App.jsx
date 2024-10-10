@@ -92,7 +92,7 @@ function App() {
 
   return (
     <div className='flex justify-center items-center w-full lg:h-[100vh]'>
-      <div className=' bg-white lg:rounded-3xl flex justify-center items-center flex-col lg:flex-row w-full h-full lg:w-[60%] lg:h-[90%]  '>
+      <div className=' bg-white lg:rounded-3xl flex justify-center items-center flex-col lg:flex-row w-full h-full lg:w-[60%] lg:h-[90%]   '>
         <div className='bg-white lg:rounded-3xl flex h-[100%] w-[100%] lg:w-[500px]'>
           <div className='border-radius w-[90%] flex flex-col mx-auto mt-10 lg:px-0 lg:mt-0 lg:py-5 '>
             <div className='flex flex-col lg:flex-row justify-between'>
@@ -108,7 +108,7 @@ function App() {
                   <div className='flex'>
                     <div>
                       <p onFocus={handleMortgageAmountFocus}
-                        onBlur={handleMortgageAmountBlur} style={{ backgroundColor: errors.mortgageAmount ? '#D97F7F' : mortgageAmountFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700  p-2 h-[50px] lg:h-[40px] flex justify-center items-center">$</p>
+                        onBlur={handleMortgageAmountBlur} style={{ backgroundColor: errors.mortgageAmount ? '#D97F7F' : mortgageAmountFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700  p-2 h-[50px] md:h-[50px] lg:h-[40px] flex justify-center items-center">$</p>
                     </div>
                     <div className='flex flex-col w-[100%] '>
                       <input
@@ -133,7 +133,7 @@ function App() {
                             onBlur={handleMortgageTermBlur}
                             style={{
                               borderColor: errors.mortgageTerm ? '#D97F7F' : mortgageTermFocused ? '#B9D97F' : '#96B3B0',
-                            }} type='number' step="any" className='input-reverse w-[100%]'  {...register('mortgageTerm', { required: true })} onInput={(e) => setLoanTerm(parseInt(e.target.value))} />
+                            }} type='number' step="any" className='input-reverse w-[100%] '  {...register('mortgageTerm', { required: true })} onInput={(e) => setLoanTerm(parseInt(e.target.value))} />
                           <div>
                             <p onFocus={handleMortgageTermFocus}
                               onBlur={handleMortgageTermBlur} style={{ backgroundColor: errors.mortgageTerm ? '#D97F7F' : mortgageTermFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">years</p>
@@ -172,7 +172,7 @@ function App() {
                         , borderColor: radioRepaymentFocused ? '#FFFF40' : '#96B3B0'
                       }}
                       className='relative border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
-                      <input className='inputs inputss w-6' type="radio" value="repayment" checked={repaymentType === 'repayment'} {...register('repaymentType')} onChange={() => setRepaymentType('repayment')} />
+                      <input className='inputs inputss midinput w-6' type="radio" value="repayment" checked={repaymentType === 'repayment'} {...register('repaymentType')} onChange={() => setRepaymentType('repayment')} />
                       <p className='ml-2 font-bold text-slate-800'>Repayment</p></div>
 
 
@@ -181,7 +181,7 @@ function App() {
                         backgroundColor: radioInterestFocused ? '#B9D97F' : ''
                         , borderColor: radioInterestFocused ? '#FFFF40' : '#96B3B0'
                       }} className='relative mt-2 border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
-                      <input className=' inputss inputs w-6' type="radio" value="interestOnly" checked={repaymentType === 'interestOnly'} {...register('repaymentType')} onChange={() => setRepaymentType('interestOnly')} />
+                      <input className=' inputss inputs midinput w-6' type="radio" value="interestOnly" checked={repaymentType === 'interestOnly'} {...register('repaymentType')} onChange={() => setRepaymentType('interestOnly')} />
                       <p className='ml-2 font-bold text-slate-800'>Interest Only</p></div>
 
                   </div>

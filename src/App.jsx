@@ -1,10 +1,29 @@
 import React, { useRef, useEffect, useState } from 'react'
 import Illustrationsvg from "./components/Illustrationsvg"
 import Iconcalculator from "./components/Iconcalculator"
+import { useCalculatorContext } from './context/Context';
 
 import { useForm } from 'react-hook-form';
 
 function App() {
+  const { radioRepaymentFocused,
+    handleRadioRepaymentFocus,
+    handleRadioRepaymentBlur,
+    radioInterestFocused,
+    handleRadioInterestFocus,
+    handleRadioInterestBlur,
+    mortgageAmountFocused,
+    mortgageTermFocused,
+    interestRateFocused,
+    handleMortgageAmountFocus,
+    handleMortgageAmountBlur,
+    handleMortgageTermFocus,
+    handleMortgageTermBlur,
+    handleInterestRateFocus,
+    handleInterestRateBlur,
+    clicked,
+    toggleTrue,
+    toggleFalse } = useCalculatorContext();
 
   const { reset, register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
@@ -12,71 +31,13 @@ function App() {
   const mortgageAmount = watch('mortgageAmount');
   const interestRate = watch('interestRate');
   const mortgageTerm = watch('mortgageTerm');
-  const [repaymentType, setRepaymentType] = useState('repayment');
-  const [clicked, setClicked] = useState(false);
   const [loanTerm, setLoanTerm] = useState(0);
-  const [mortgageAmountFocused, setMortgageAmountFocused] = useState(false);
-  const [mortgageTermFocused, setMortgageTermFocused] = useState(false);
-  const [interestRateFocused, setInterestRateFocused] = useState(false);
-  const [radioRepaymentFocused, setRadioRepaymentFocused] = useState(false);
-  const [radioInterestFocused, setRadioInterestFocused] = useState(false);
-
-  const handleRadioRepaymentFocus = () => {
-    setRadioRepaymentFocused(true);
-  };
-
-  const handleRadioRepaymentBlur = () => {
-    setRadioRepaymentFocused(false);
-  };
-
-  const handleRadioInterestFocus = () => {
-    setRadioInterestFocused(true);
-  };
-
-  const handleRadioInterestBlur = () => {
-    setRadioInterestFocused(false);
-  };
-
-
-
-  const handleMortgageAmountFocus = () => {
-    setMortgageAmountFocused(true);
-  };
-
-  const handleMortgageAmountBlur = () => {
-    setMortgageAmountFocused(false);
-  };
-
-  const handleMortgageTermFocus = () => {
-    setMortgageTermFocused(true);
-  };
-
-  const handleMortgageTermBlur = () => {
-    setMortgageTermFocused(false);
-  };
-
-  const handleInterestRateFocus = () => {
-    setInterestRateFocused(true);
-  };
-
-  const handleInterestRateBlur = () => {
-    setInterestRateFocused(false);
-  };
-
-
-  const toggleTrue = () => {
-    setClicked(true);
-  }
-
-  const toggleFalse = () => {
-    setClicked(false);
-  }
+  const [repaymentType, setRepaymentType] = useState('repayment');
 
   const calculateRepayment = () => {
     const principal = mortgageAmount;
     const monthlyInterestRate = interestRate / 100 / 12;
     const numberOfMonths = mortgageTerm * 12;
-
     const monthlyRepayment = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfMonths) / (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1);
     return monthlyRepayment;
 
@@ -239,4 +200,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

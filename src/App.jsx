@@ -57,7 +57,7 @@ function App() {
         <div className='bg-white lg:rounded-3xl flex h-[100%] w-[100%] lg:w-[500px]'>
           <div className='border-radius w-[90%] flex flex-col mx-auto mt-10 lg:px-0 lg:mt-0 lg:py-5 '>
             <div className='flex flex-col lg:flex-row justify-between'>
-              <p className='text-slate-800 font-bold text-[20px] '>Mortgage Calculator</p>
+              <h1 className='text-slate-800 font-bold text-[20px] '>Mortgage Calculator</h1>
               <button onClick={() => { toggleFalse(), reset() }} className=' text-left mt-2 font-semibold cursor-pointer underline text-[12px] text-slate-700'>Clear All</button>
             </div>
 
@@ -65,7 +65,7 @@ function App() {
               <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className='flex flex-col '>
-                  <label className=' font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Amount</label>
+                  <h2 className=' font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Amount</h2>
                   <div className='flex'>
                     <div>
                       <p onFocus={handleMortgageAmountFocus}
@@ -78,7 +78,7 @@ function App() {
                         style={{
                           borderColor: errors.mortgageAmount ? '#D97F7F' : mortgageAmountFocused ? '#B9D97F' : '#96B3B0',
                         }}
-                        type='number' step="any" className='lg:mb-2 w-[100%]' {...register('mortgageAmount', { required: true })} />
+                        type='number' step="any" className='lg:mb-2 w-[100%] h-[50px] lg:h-[40px] md:h-[50px]' {...register('mortgageAmount', { required: true })} />
                       <div> {errors.mortgageAmount && <p style={{ color: errors.mortgageAmount ? '#D97F7F' : '' }} className='text-[12px] -ml-[25px] mt-2 font-semibold'> This field is required</p>}</div>
                     </div>
 
@@ -86,7 +86,7 @@ function App() {
 
                   <div className='w-[100%] mt-5 flex flex-col lg:flex-row justify-center lg:gap-x-5 items-center lg:justify-evenly '>
                     <div className='flex flex-col  w-[100%] lg:w-[50%] mb-5 lg:mb-0 '>
-                      <label className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Term</label>
+                      <h2 className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Term</h2>
                       <div className='flex flex-col w-[100%] '>
                         <div className='flex'>
                           <input
@@ -94,10 +94,10 @@ function App() {
                             onBlur={handleMortgageTermBlur}
                             style={{
                               borderColor: errors.mortgageTerm ? '#D97F7F' : mortgageTermFocused ? '#B9D97F' : '#96B3B0',
-                            }} type='number' step="any" className='input-reverse w-[100%] '  {...register('mortgageTerm', { required: true })} onInput={(e) => setLoanTerm(parseInt(e.target.value))} />
+                            }} type='number' step="any" className='input-reverse w-[100%]  h-[50px] lg:h-[40px] md:h-[50px] '  {...register('mortgageTerm', { required: true })} onInput={(e) => setLoanTerm(parseInt(e.target.value))} />
                           <div>
                             <p onFocus={handleMortgageTermFocus}
-                              onBlur={handleMortgageTermBlur} style={{ backgroundColor: errors.mortgageTerm ? '#D97F7F' : mortgageTermFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">years</p>
+                              onBlur={handleMortgageTermBlur} style={{ backgroundColor: errors.mortgageTerm ? '#D97F7F' : mortgageTermFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] md:h-[50px] lg:h-[40px]">years</p>
                           </div>
                         </div>
                         <div> {errors.mortgageTerm && <p style={{ color: errors.mortgageTerm ? '#D97F7F' : '' }} className='text-[12px] -ml-[25px] pl-6 mt-2'> This field is required</p>}</div>
@@ -113,10 +113,10 @@ function App() {
                             onBlur={handleInterestRateBlur}
                             style={{
                               borderColor: errors.interestRate ? '#D97F7F' : interestRateFocused ? '#B9D97F' : '#96B3B0',
-                            }} type='number' step="any" className='input-reverse w-[100%]' {...register('interestRate', { required: true })} />
+                            }} type='number' step="any" className='input-reverse w-[100%] h-[50px] lg:h-[40px] md:h-[50px]' {...register('interestRate', { required: true })} />
                           <div>
                             <p onFocus={handleInterestRateFocus}
-                              onBlur={handleInterestRateBlur} style={{ backgroundColor: errors.interestRate ? '#D97F7F' : interestRateFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] lg:h-[40px]">%</p>
+                              onBlur={handleInterestRateBlur} style={{ backgroundColor: errors.interestRate ? '#D97F7F' : interestRateFocused ? '#B9D97F' : '#96B3B0' }} className="font-semibold text-slate-700 bg-slate-300 p-2 h-[50px] md:h-[50px] lg:h-[40px]">%</p>
                           </div>
                         </div>
                         <div> {errors.interestRate && <p style={{ color: errors.interestRate ? '#D97F7F' : '' }} className='text-[12px] -ml-[25px] pl-6 mt-2'> This field is required</p>}</div>
@@ -125,7 +125,7 @@ function App() {
                   </div>
 
                   <div className=' flex flex-col mt-5  '>
-                    <label className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Type</label>
+                    <h2 className='font-semibold text-[12px] text-slate-300 mb-2'>Mortgage Type</h2>
 
                     <div onFocus={handleRadioRepaymentFocus}
                       onBlur={handleRadioRepaymentBlur} style={{
@@ -133,7 +133,7 @@ function App() {
                         , borderColor: radioRepaymentFocused ? '#FFFF40' : '#96B3B0'
                       }}
                       className='relative border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
-                      <input className='inputs inputss midinput w-6' type="radio" value="repayment" checked={repaymentType === 'repayment'} {...register('repaymentType')} onChange={() => setRepaymentType('repayment')} />
+                      <input className='inputs inputss midinput  w-6' type="radio" value="repayment" checked={repaymentType === 'repayment'} {...register('repaymentType')} onChange={() => setRepaymentType('repayment')} />
                       <p className='ml-2 font-bold text-slate-800'>Repayment</p></div>
 
 
@@ -142,7 +142,7 @@ function App() {
                         backgroundColor: radioInterestFocused ? '#B9D97F' : ''
                         , borderColor: radioInterestFocused ? '#FFFF40' : '#96B3B0'
                       }} className='relative mt-2 border-2 border-slate-300 rounded-sm h-[50px] lg:h-[40px]  p-2 flex justify-start items-center'>
-                      <input className=' inputss inputs midinput w-6' type="radio" value="interestOnly" checked={repaymentType === 'interestOnly'} {...register('repaymentType')} onChange={() => setRepaymentType('interestOnly')} />
+                      <input className=' inputs inputss midinput w-6' type="radio" value="interestOnly" checked={repaymentType === 'interestOnly'} {...register('repaymentType')} onChange={() => setRepaymentType('interestOnly')} />
                       <p className='ml-2 font-bold text-slate-800'>Interest Only</p></div>
 
                   </div>
